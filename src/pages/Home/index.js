@@ -3,11 +3,11 @@ import { Container, Content, Title, SubTitle,Resume } from './styles';
 
 const repository = [
   {   
-      url: '',
+      url: 'https://github.com/angelocerqueira/Frontend-challenge-reactJS',
       content:'FrontEnd - ReactJS'
   },
   {   
-    url: '',
+    url: 'https://github.com/angelocerqueira/challenge-node',
     content:'BackEnd - NodeJS'
 },
 ];
