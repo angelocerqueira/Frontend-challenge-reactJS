@@ -51,7 +51,7 @@ function Home() {
       <SubTitle> Repositório:  </SubTitle>
         { repository.map(a => (
           <div key={a.url}>
-            <a href={a.url} target="_blank"> {a.content} </a>
+            <a href={a.url} target="_blank" rel="noopener noreferrer"> {a.content} </a>
           </div>
           ))
         }
