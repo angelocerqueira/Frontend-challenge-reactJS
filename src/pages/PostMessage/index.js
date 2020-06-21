@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import io from 'socket.io-client';
 
 import api from '../../services/api';
 import {
   Container, 
   InputText,
   Content, 
-  Button} from './styles'
-
+  Button
+} from './styles'
 
 function PostMessage() {
-const [ string, setString ] = useState([]);
-
-  function handleSubmit(data){
+  const [ string, setString ] = useState([]);
+  
+  function handleSubmit(data, { resetForm }){
     const { mensagem } = data;
     setString(mensagem); 
     console.log(mensagem)
+    const socket = io('http://localhost:3333');
+    socket.emit('postLive', mensagem);
     toaaast();
+    resetForm();
   }
 
   useEffect(()=> {
@@ -27,7 +31,6 @@ const [ string, setString ] = useState([]);
     }
     postmessage();
     },[string])
- 
  
   const toaaast = () => {
     toast.dark('Saved message with success!', {
