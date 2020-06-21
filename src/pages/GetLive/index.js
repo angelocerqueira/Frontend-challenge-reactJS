@@ -1,36 +1,40 @@
 import React, {useEffect, useState} from 'react';
 import io from 'socket.io-client';
-import api from '../../services/api';
-// import { Container } from './styles';
+import { toast, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+import api from '../../services/api';
+import { Container } from './styles';
 
 function GetLive() {
-  // const [msg, setMsg ] = useState([]);
+  const [msg, setMsg ] = useState([]);
+  const [socketMsg, setSocketMsg] = useState([]);
 
-  // useEffect( () => {
-  //   async function getmsg(){
-  //     const response = await api.get(`/message`);
-  //     const a = response.data;
-  //     return setMsg(a);
-  //   }
-  //   getmsg();
-  // }, [msg]);
+  useEffect( () => {
+    async function getmsg(){
+      const response = await api.get(`/message`);
+      const a = response.data;
+      return setMsg(a);
+    }
+      getmsg();
+      socketInit();
+    }, [msg]);
+ 
+    function socketInit (){
+      const socket = io('http://localhost:3333');
+      socket.on('retornoPostLive', data => {
+        setSocketMsg(data);
+        console.log(data + ' reotnro')
+      });
+    }
 
-  // useEffect( () => {
-  //   const socket = io('http://localhost:3333/live');
-  // //   socket.emit('my other event', { my: 'data' });
-  
-  // socket.on('connection', (socket) => {
-  //   socket.on('news', { hello: 'world' });
-  //   socket.emit('my other event', (data) => {
-  //     console.log(data);
-  //   });
-  // });
-  // }, [])
-  return (
-  <div>
-    <h1>asçladk</h1>
-  </div>);
+    return (
+    <div>
+      <Container>
+        <h3> Retorno em tempo real, com socket.io: </h3>
+        <h1>{ socketMsg|| msg }</h1>
+      </Container>
+    </div>);
 }
 
 export default GetLive;
