@@ -21,10 +21,10 @@ function GetLive() {
     }, [msg]);
  
     function socketInit (){
-      const socket = io('http://localhost:3333');
+      const socket = io('http://3.128.102.225');
       socket.on('retornoPostLive', data => {
         setSocketMsg(data);
-        console.log(data + ' reotnro')
+        console.log(data + ' Retorno')
       });
     }
 

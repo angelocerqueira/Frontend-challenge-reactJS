@@ -18,7 +18,7 @@ function PostMessage() {
     const { mensagem } = data;
     setString(mensagem); 
     console.log(mensagem)
-    const socket = io('http://localhost:3333');
+    const socket = io('http://3.128.102.225');
     socket.emit('postLive', mensagem);
     toaaast();
     resetForm();
